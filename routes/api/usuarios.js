@@ -5,6 +5,10 @@ var router = express.Router();
 const Usuario = require('../../database/models/ususario');
 const Restaurant =require('../../database/models/restaurant');
 
+
+
+//USUARIO
+
 /* GET users. */
 
 router.get('/', function(req, res, next) {
