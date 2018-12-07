@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 
-const Usuario = require('../../database/models/ususario');
+const Usuario = require('../../database/models/usuario');
 
 /* GET users. */
 router.get('/', function(req, res, next) {
@@ -59,5 +59,46 @@ router.post('/', function(req, res, next) {
             });
         });
   });
+  router.delete('/:id', function (req, res, next) {
+      let idUser = req.params.id;
+      Usuario.remove({_id:idUser}).exec((err, result) => {
+            if(err){
+                res.status(500).json({
+                    error:err
+                });
+                return;
+            }
+            if(result){
+                res.status(200).json({
+                    message:"Usuario eliminado",
+                    result: result
+                })
+            }
+        })
+  });
+
+  router.patch('/:id', function (req, res, next) {
+    let idUser = req.params.id;
+    let userData = {}
+    Object.keys(req.body).forEach((key) => {
+        userData[key] = req.body[key];
+    })
+    console.log(userData);
+    return;
+    Usuario.findByIdAndUpdate(idUser, ).exec((err, result) => {
+          if(err){
+              res.status(500).json({
+                  error:err
+              });
+              return;
+          }
+          if(result){
+              res.status(200).json({
+                  message:"Usuario eliminado",
+                  result: result
+              })
+          }
+      })
+});
 
 module.exports = router;
