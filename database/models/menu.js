@@ -1,7 +1,7 @@
 const mongoose = require('../connect');
 const Schema = mongoose.Schema;
 
-cont menuSchema = Schema({
+const menuSchema = Schema({
   nombre:String,
   precio:Number,
   descripcion:String,
@@ -9,9 +9,13 @@ cont menuSchema = Schema({
     type: Date,
     default: Date.now()
   },
-  foto:String
+  fotografia_del_producto:String,
+  id_restaurant:{
+    type:Schema.Types.ObjectId,
+    ref:"Restaurant"
+  } //aunque el  inge lo pone con un String
 })
 
-const menu = mongoose.model("Menu",menuSchema);}
+const menu = mongoose.model('Menu', menuSchema);
 
 module.exports = menu;

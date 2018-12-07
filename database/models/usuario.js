@@ -11,10 +11,10 @@ const usuarioSchema = Schema({
     lat: Number,
     fechaRegistro: {
         type: Date,
-        dafault: Date.now()
+        default: Date.now()
 
     },
-    fotlLugar: String
+    fotoLugar: String
     //tipo de usuario
 })
 

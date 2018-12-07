@@ -16,7 +16,7 @@ const restaurantSchema = Schema({
         dafault: Date.now()
 
     },
-    fotlLugar: String
+    fotoLugar: String
 })
 
 const restaurant = mongoose.model('Restaurant', restaurantSchema);
