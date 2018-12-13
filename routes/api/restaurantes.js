@@ -10,6 +10,7 @@ const Restaurant = require('../../database/models/restaurant');
 
 
 router.get('/', function(req, res, next) {
+
     Restaurant.find().exec()
     .then(docs => {
         if(docs.length == 0){
@@ -17,24 +18,41 @@ router.get('/', function(req, res, next) {
                 message: "no hay restaurantes en la BD"
             })
         }else{
-            res.json({
+            res.json(/*{
                 count: docs.length,
                 result: docs,
                 request: {
                     type: "GET"
                 }
-  
-            })
+
+            }*/docs)
         }
     }).catch(err=>{
         res.status(500).json({
             error:err
         });
     });
-  });
-  
+});
+
+/*router.get('/', function (req, res, next) {
+
+    Restaurant.find().populate('propietario', '-__v').exec().then(docs => {
+        if (docs.length == 0) {
+            res.json({
+                message: "No se encontro en la base de datos"
+            })
+        } else {
+            res.json(docs);
+        }
+    }).catch(err => {
+        res.json({
+            error: err
+        });
+    })//git push -u origin master
+
+});*/
   //POST
-  
+
   /* save restaurant. */
   router.post('/', function(req, res, next) {
       let restaurantData ={
@@ -64,13 +82,13 @@ router.get('/', function(req, res, next) {
               });
           });
     });
-  
-  
+
+
   //DELETE
-  
+
   router.delete('/:id', function(req, res, next){
         let idRestaurant = req.params.id;
-  
+
        Restaurant.remove({_id:idRestaurant}).exec((err,result)=>{
           if(err){
             res.status(500).json({
@@ -86,17 +104,17 @@ router.get('/', function(req, res, next) {
           }
      })
   });
-  
+
   //PATCH
-  
+
   router.patch('/:id', function(req, res, next){
         let idRestaurant = req.params.id;
         let userData = {}
         Object.keys(req.body).forEach((key)=>{
             userData[key]  = req.body[key];
         })
-  
-  
+
+
        Restaurant.findByIdAndUpdate(idRestaurant, userData).exec((err,result)=>{
           if(err){
             res.status(500).json({
@@ -111,10 +129,8 @@ router.get('/', function(req, res, next) {
           }
      })
   });
-  
+
   //PUT
 
 
   module.exports = router;
-  
-  

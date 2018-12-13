@@ -2,8 +2,13 @@ const mongoose = require('../connect');
 const Schema = mongoose.Schema;
 
 const menuSchema = Schema({
-  nombre:String,
-  precio:Number,
+
+  nombre: {
+    type: String,
+    required: [true, 'debe poner nombre plato'],
+    //match: /^([A-Z][a-z]+)$/i,
+  },
+  precio:{},
   descripcion:String,
   fechaRegistro:{
     type: Date,

@@ -11,7 +11,7 @@ var usuariosRouter = require('./routes/api/usuarios');
 var ordenesRouter = require('./routes/api/ordenes');
 var menusRouter = require('./routes/api/menus');
 
-const port = process.env.PORT || 7777;
+const port = process.env.PORT || 3000;
 
 var app = express();
 
@@ -27,10 +27,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/restaurantes',restaurantesRouter);
-app.use('/usuarios', usuariosRouter);
-app.use('/ordenes',ordenesRouter);
-app.use('/menus',menusRouter);
+app.use('/api/restaurantes',restaurantesRouter);
+app.use('/api/usuarios', usuariosRouter);
+app.use('/api/ordenes',ordenesRouter);
+app.use('/api/menus',menusRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -40,8 +40,11 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.message = err.messageapp.use(function(req, res, next) {
+    next(createError(404));
+  });
+  
+  res.locals.error = req.app.get('env') === 'development' ? err: {};
 
   // render the error page
   res.status(err.status || 500);

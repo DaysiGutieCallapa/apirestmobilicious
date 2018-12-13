@@ -7,6 +7,4 @@ const Detalle = require('../../database/models/detalle');
 
 
 
-
-
   module.exports = router;

@@ -2,6 +2,7 @@ const mongoose = require('../connect');
 const Schema = mongoose.Schema;
 
 const ordenSchema = Schema({
+
   id_menu:[{
     type:Schema.Types.ObjectId,
     ref:"Menu"
@@ -17,13 +18,13 @@ const ordenSchema = Schema({
   }, //aunque el  inge lo pone con un String
   calle: String, // xsi acaso lo puso el inge,xq dice q latitud y log es muy para robot en mi caso lugar de envio
   lugarEnvio: [Number],
-  pagoTotal:String,//aunque el inge lo pone un Number
+  pagoTotal:Number,//aunque el inge lo pone un Number
   fechaRegistro:{
     type:Date,
     default: Date.now()
   }
 });
 
-const orden = mongoose.model("Orden",ordenSchema);
+const Orden = mongoose.model("Orden",ordenSchema);
 
-module.exports = orden;
+module.exports = Orden;
